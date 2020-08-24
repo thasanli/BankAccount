@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "User Account";
+}
+
+
+@model Transactions
+
+
+<div class="dataContainer">
+    <h1> Welcome @ViewBag.User.FirstName</h1>
+    <p>Current Balance is @ViewBag.User.AccountBalace  </p> 
+    <form asp-action="makeTransaction" asp-controller="home" method="post">
+        <label asp-for="Amount">Deposit/Withdraw</label>
+        <input asp-for="Amount">
+        <button type="submit">Submit</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var data in ViewBag.UserData.AllUserTransactions)
+            {
+            <tr>
+                <td>@data.Amount</td>
+                <td>@data.CreatedAt</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
